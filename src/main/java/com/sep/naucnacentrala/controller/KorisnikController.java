@@ -41,4 +41,17 @@ public class KorisnikController {
     }
 
 
+    @RequestMapping(
+            value = "/getActiveUser",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Korisnik> getActiveUser() {
+
+        return new ResponseEntity<Korisnik>(korisnikService.aktivanKorisnik, HttpStatus.OK);
+    }
+
+
+
+
 }

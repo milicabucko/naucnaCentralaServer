@@ -95,7 +95,7 @@ public class MagazinService {
     }
 
     private boolean placenaClanarinaZaMagazin(Long korisnikId, Long magazinId) {
-        String danasnjiDatum = "20181122";
+        String danasnjiDatum = "20181201";
         Clanarina clanarina = clanarinaRepository.findByKorisnikIdAndMagazinIdAndDatumPocetkaLessThanEqualAndDatumZavrsetkaGreaterThanEqual(korisnikId, magazinId, danasnjiDatum, danasnjiDatum);
         if (clanarina != null) {
             return true;
