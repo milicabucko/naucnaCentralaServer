@@ -7,6 +7,8 @@ public class IzdanjeMagazinaDTO {
 
     private Magazin magazin;
 
+    private IzdanjeMagazina izdanje;
+
     private String mesec;
 
     private Boolean preuzmiIzdanje;
@@ -17,9 +19,9 @@ public class IzdanjeMagazinaDTO {
 
     }
 
-    public IzdanjeMagazinaDTO(Magazin magazin, String mesec) {
+    public IzdanjeMagazinaDTO(Magazin magazin, IzdanjeMagazina izdanje) {
         this.magazin = magazin;
-        this.mesec = mesec;
+        this.izdanje = izdanje;
     }
 
     public Magazin getMagazin() {
@@ -28,6 +30,14 @@ public class IzdanjeMagazinaDTO {
 
     public void setMagazin(Magazin magazin) {
         this.magazin = magazin;
+    }
+
+    public IzdanjeMagazina getIzdanje() {
+        return izdanje;
+    }
+
+    public void setIzdanje(IzdanjeMagazina izdanje) {
+        this.izdanje = izdanje;
     }
 
     public String getMesec() {

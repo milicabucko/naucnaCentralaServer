@@ -114,7 +114,7 @@ public class MagazinService {
             if (Constants.ULOGA_CITALAC.equals(korisnik.get().getUloga())) {
                 for (IzdanjeMagazina izdanjeMagazina : izdanja) {
                     Magazin m = magazinRepository.findById(izdanjeMagazina.getMagazinId()).get();
-                    IzdanjeMagazinaDTO izdanjeDTO = new IzdanjeMagazinaDTO(m, izdanjeMagazina.getMesec());
+                    IzdanjeMagazinaDTO izdanjeDTO = new IzdanjeMagazinaDTO(m, izdanjeMagazina);
                     if (!m.getOpenAccess()) {
                         if (placenaClanarinaZaMagazin(korisnikId, magazinId)) {
                             izdanjeDTO.setPreuzmiIzdanje(true);

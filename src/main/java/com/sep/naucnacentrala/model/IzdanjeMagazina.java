@@ -62,4 +62,5 @@ public class IzdanjeMagazina implements Serializable {
     public void setCena(Double cena) {
         this.cena = cena;
     }
+
 }

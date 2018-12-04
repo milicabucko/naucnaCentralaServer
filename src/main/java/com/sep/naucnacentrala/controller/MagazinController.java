@@ -2,6 +2,7 @@ package com.sep.naucnacentrala.controller;
 
 import com.sep.naucnacentrala.dto.IzdanjeMagazinaDTO;
 import com.sep.naucnacentrala.dto.MagazinDTO;
+import com.sep.naucnacentrala.dto.NaucniRadDTO;
 import com.sep.naucnacentrala.model.Korisnik;
 import com.sep.naucnacentrala.model.Magazin;
 import com.sep.naucnacentrala.service.KorisnikService;
@@ -46,5 +47,17 @@ public class MagazinController {
         System.out.println("Izdanja magazina" + izdanjaMagazina.size());
         return new ResponseEntity<List<IzdanjeMagazinaDTO>>(izdanjaMagazina, HttpStatus.OK);
     }
+
+    @RequestMapping(
+            value    = "/izdanje/izlistajSveRadove/{izdanjeId}",
+            method   = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<NaucniRadDTO>> izlistajSveRadove(@PathVariable Long izdanjeId) {
+        List<NaucniRadDTO> listaRadova = magazinService.findAllListaNaucniRad(KorisnikService.aktivanKorisnik.getId(), izdanjeId);
+        System.out.println("IlistaRadova" + listaRadova.size());
+        return new ResponseEntity<List<NaucniRadDTO>>(listaRadova, HttpStatus.OK);
+    }
+
 
 }
