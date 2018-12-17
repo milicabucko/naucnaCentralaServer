@@ -59,8 +59,8 @@ public class MagazinService {
         if (korisnik.isPresent()) {
             if (Constants.ULOGA_AUTOR.equals(korisnik.get().getUloga())) {
                 for (Magazin m : magazini) {
+                    MagazinDTO mDTO = new MagazinDTO(m);
                     if (m.getOpenAccess()) {
-                        MagazinDTO mDTO = new MagazinDTO(m);
                         if (placenaClanarinaZaMagazin(korisnikId, m.getId())) {
                             mDTO.setPlatiClanarinu(false);
                             mDTO.setPostaviRad(true);
@@ -71,19 +71,28 @@ public class MagazinService {
                         }
                         sviMagazini.add(mDTO);
                     }
+                    else {
+                        mDTO.setPlatiClanarinu(false);
+                        mDTO.setPostaviRad(true);
+                        sviMagazini.add(mDTO);
+                    }
                 }
 
             }
             else {          //kad je citalac
                 for (Magazin m : magazini) {
+                    MagazinDTO mDTO = new MagazinDTO(m);
                     if (!m.getOpenAccess()) {
-                        MagazinDTO mDTO = new MagazinDTO(m);
                         if (placenaClanarinaZaMagazin(korisnikId, m.getId())) {
                             mDTO.setPlatiClanarinu(false);
                         }
                         else {
                             mDTO.setPlatiClanarinu(true);
                         }
+                        sviMagazini.add(mDTO);
+                    }
+                    else {
+                        mDTO.setPlatiClanarinu(false);
                         sviMagazini.add(mDTO);
                     }
                 }

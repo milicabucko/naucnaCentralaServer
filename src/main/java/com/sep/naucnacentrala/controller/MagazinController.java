@@ -43,7 +43,7 @@ public class MagazinController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<List<IzdanjeMagazinaDTO>> findAllIzdanjeMagazina(@PathVariable Long magazinId) {
-       List<IzdanjeMagazinaDTO> izdanjaMagazina = magazinService.findAllListaIzdanjeMagazina(magazinId, KorisnikService.aktivanKorisnik.getId());
+       List<IzdanjeMagazinaDTO> izdanjaMagazina = magazinService.findAllListaIzdanjeMagazina(KorisnikService.aktivanKorisnik.getId(), magazinId);
         System.out.println("Izdanja magazina" + izdanjaMagazina.size());
         return new ResponseEntity<List<IzdanjeMagazinaDTO>>(izdanjaMagazina, HttpStatus.OK);
     }
