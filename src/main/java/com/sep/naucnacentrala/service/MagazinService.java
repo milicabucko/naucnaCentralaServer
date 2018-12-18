@@ -210,5 +210,11 @@ public class MagazinService {
         }
     }
 
+    public Kupovina kupovina(Long korisnikId, Long proizvodId, String tipProizvoda) {
+        Kupovina kupovina = new Kupovina(korisnikId, proizvodId, tipProizvoda);
+        kupovina = kupovinaRepository.save(kupovina);
+        return kupovina;
+    }
+
 
 }

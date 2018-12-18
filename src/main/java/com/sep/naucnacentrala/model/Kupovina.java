@@ -21,6 +21,12 @@ public class Kupovina implements Serializable {
 
     public Kupovina() {}
 
+    public Kupovina(Long korisnikId, Long proizvodId, String tipProizvoda) {
+        this.korisnikId = korisnikId;
+        this.proizvodId = proizvodId;
+        this.tipProizvoda = tipProizvoda;
+    }
+
     public Long getId() {
         return id;
     }

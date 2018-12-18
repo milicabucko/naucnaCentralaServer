@@ -59,5 +59,16 @@ public class MagazinController {
         return new ResponseEntity<List<NaucniRadDTO>>(listaRadova, HttpStatus.OK);
     }
 
+    @RequestMapping(
+            value    = "/kupovina/{korisnikId}/{proizvodId}/{tipProizvoda}",
+            method   = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<String> kupovina(@PathVariable Long korisnikId, @PathVariable Long proizvodId, @PathVariable String tipProizvoda) {
+        System.out.println("Dosao");
+        magazinService.kupovina(korisnikId, proizvodId, tipProizvoda);
+        return new ResponseEntity<>("Successful", HttpStatus.OK);
+    }
+
 
 }
