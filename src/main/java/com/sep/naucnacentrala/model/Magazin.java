@@ -17,7 +17,17 @@ public class Magazin implements Serializable {
 
     private Boolean openAccess;
 
+    private String slika;
+
     Magazin() {}
+
+    public void setSlika(String slika) {
+        this.slika = slika;
+    }
+
+    public String getSlika() {
+        return slika;
+    }
 
     public Long getId() {
         return id;

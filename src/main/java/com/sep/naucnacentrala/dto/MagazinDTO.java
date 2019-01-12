@@ -10,6 +10,8 @@ public class MagazinDTO {
 
     private Boolean postaviRad;
 
+    private Boolean placenaClanarina;
+
     public MagazinDTO() {
 
     }
@@ -40,5 +42,13 @@ public class MagazinDTO {
 
     public void setPostaviRad(Boolean postaviRad) {
         this.postaviRad = postaviRad;
+    }
+
+    public void setPlacenaClanarina(Boolean placenaClanarina) {
+        this.placenaClanarina = placenaClanarina;
+    }
+
+    public Boolean getPlacenaClanarina() {
+        return placenaClanarina;
     }
 }

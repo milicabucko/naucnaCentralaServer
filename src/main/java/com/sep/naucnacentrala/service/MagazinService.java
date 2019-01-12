@@ -62,10 +62,12 @@ public class MagazinService {
                     MagazinDTO mDTO = new MagazinDTO(m);
                     if (m.getOpenAccess()) {
                         if (placenaClanarinaZaMagazin(korisnikId, m.getId())) {
+                            mDTO.setPlacenaClanarina(true);
                             mDTO.setPlatiClanarinu(false);
                             mDTO.setPostaviRad(true);
                         }
                         else {
+                            mDTO.setPlacenaClanarina(false);
                             mDTO.setPlatiClanarinu(true);
                             mDTO.setPostaviRad(false);
                         }

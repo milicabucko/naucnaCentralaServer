@@ -17,7 +17,7 @@ public class IzdanjeMagazina implements Serializable {
 
     private String mesec;
 
-    private String besplatan;
+    private Boolean besplatan;
 
     private Double cena;
 
@@ -47,11 +47,11 @@ public class IzdanjeMagazina implements Serializable {
         this.mesec = mesec;
     }
 
-    public String getBesplatan() {
+    public Boolean getBesplatan() {
         return besplatan;
     }
 
-    public void setBesplatan(String besplatan) {
+    public void setBesplatan(Boolean besplatan) {
         this.besplatan = besplatan;
     }
 
