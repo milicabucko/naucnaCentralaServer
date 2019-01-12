@@ -2,12 +2,15 @@ package com.sep.naucnacentrala.dto;
 
 import com.sep.naucnacentrala.model.IzdanjeMagazina;
 import com.sep.naucnacentrala.model.Magazin;
+import com.sep.naucnacentrala.model.NaucniRad;
 
 public class NaucniRadDTO {
 
     private Magazin magazin;
 
     private IzdanjeMagazina izdanjeMagazina;
+
+    private NaucniRad rad;
 
     private String koautori;
 
@@ -23,9 +26,10 @@ public class NaucniRadDTO {
 
     private Boolean kupiRad;
 
-    public NaucniRadDTO(Magazin magazin, IzdanjeMagazina izdanjeMagazina, String koautori, String kljucniPojmovi, String naucnaOblast, Double cena, String link) {
+    public NaucniRadDTO(Magazin magazin, IzdanjeMagazina izdanjeMagazina, NaucniRad rad, String koautori, String kljucniPojmovi, String naucnaOblast, Double cena, String link) {
         this.magazin = magazin;
         this.izdanjeMagazina = izdanjeMagazina;
+        this.rad = rad;
         this.koautori = koautori;
         this.kljucniPojmovi = kljucniPojmovi;
         this.naucnaOblast = naucnaOblast;
@@ -47,6 +51,14 @@ public class NaucniRadDTO {
 
     public void setIzdanjeMagazina(IzdanjeMagazina izdanjeMagazina) {
         this.izdanjeMagazina = izdanjeMagazina;
+    }
+
+    public NaucniRad getRad() {
+        return rad;
+    }
+
+    public void setRad(NaucniRad rad) {
+        this.rad = rad;
     }
 
     public String getKoautori() {

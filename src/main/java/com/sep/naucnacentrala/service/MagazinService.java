@@ -163,7 +163,7 @@ public class MagazinService {
                 for (NaucniRad naucniRad : naucniRadovi) {
                     Magazin m = magazinRepository.findById(naucniRad.getMagazinId()).get();
                     IzdanjeMagazina izdanjeMagazina = izdanjeMagazinaRepository.findById(izdanjeMagazinaId).get();
-                    NaucniRadDTO naucniRadDTO = new NaucniRadDTO(m, izdanjeMagazina, naucniRad.getKoautori(), naucniRad.getKljucniPojmovi(), naucniRad.getNaucnaOblast(),
+                    NaucniRadDTO naucniRadDTO = new NaucniRadDTO(m, izdanjeMagazina, naucniRad, naucniRad.getKoautori(), naucniRad.getKljucniPojmovi(), naucniRad.getNaucnaOblast(),
                             naucniRad.getCena(), naucniRad.getLink());
                     if (!m.getOpenAccess()) {
                         if (placenaClanarinaZaMagazin(korisnikId, m.getId())) {

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -25,6 +26,14 @@ public class MagazinController {
 
     @Autowired
     private KorisnikService korisnikService;
+
+    private final RestTemplate restTemplate;
+
+
+    @Autowired
+    public MagazinController(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     @RequestMapping(
             value    = "/magazin/findAllMagazin",
@@ -67,6 +76,7 @@ public class MagazinController {
     public ResponseEntity<String> kupovina(@PathVariable Long korisnikId, @PathVariable Long proizvodId, @PathVariable String tipProizvoda) {
         System.out.println("Dosao");
         magazinService.kupovina(korisnikId, proizvodId, tipProizvoda);
+        restTemplate.getForObject("http://localhost:4200", null, Void.class);
         return new ResponseEntity<>("Successful", HttpStatus.OK);
     }
 
