@@ -27,6 +27,15 @@ public class Clanarina implements Serializable {
 
     Clanarina() {}
 
+    public Clanarina(Long korisnikId, Long magazinId, Double cena, String datumPocetka, String datumZavrsetka, Integer brojMeseci) {
+        this.korisnikId = korisnikId;
+        this.magazinId = magazinId;
+        this.cena = cena;
+        this.datumPocetka = datumPocetka;
+        this.datumZavrsetka = datumZavrsetka;
+        this.brojMeseci = brojMeseci;
+    }
+
     public Long getId() {
         return id;
     }

@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -76,7 +78,20 @@ public class MagazinController {
     public ResponseEntity<String> kupovina(@PathVariable Long korisnikId, @PathVariable Long proizvodId, @PathVariable String tipProizvoda) {
         System.out.println("Dosao");
         magazinService.kupovina(korisnikId, proizvodId, tipProizvoda);
-        restTemplate.getForObject("http://localhost:4200", null, Void.class);
+        //restTemplate.getForObject("http://localhost:4200", null, Void.class);
+        return new ResponseEntity<>("Successful", HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value    = "/kupovina/{korisnikId}/{proizvodId}/{tipProizvoda}/{brojMeseci}",
+            method   = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<String> kupovinaClanarine(@PathVariable Long korisnikId, @PathVariable Long proizvodId, @PathVariable String tipProizvoda, @PathVariable Integer brojMeseci) {
+        System.out.println("Dosao");
+        String danasnjiDatum = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        magazinService.kupovinaPutemClanarine(korisnikId, proizvodId, brojMeseci, danasnjiDatum, true);
+        //restTemplate.getForObject("http://localhost:4200", null, Void.class);
         return new ResponseEntity<>("Successful", HttpStatus.OK);
     }
 

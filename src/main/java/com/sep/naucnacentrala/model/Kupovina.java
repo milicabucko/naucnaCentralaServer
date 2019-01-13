@@ -19,12 +19,21 @@ public class Kupovina implements Serializable {
 
     private String tipProizvoda;
 
+    private Integer brojMeseci;
+
     public Kupovina() {}
 
     public Kupovina(Long korisnikId, Long proizvodId, String tipProizvoda) {
         this.korisnikId = korisnikId;
         this.proizvodId = proizvodId;
         this.tipProizvoda = tipProizvoda;
+    }
+
+    public Kupovina(Long korisnikId, Long proizvodId, String tipProizvoda, Integer brojMeseci) {
+        this.korisnikId = korisnikId;
+        this.proizvodId = proizvodId;
+        this.tipProizvoda = tipProizvoda;
+        this.brojMeseci = brojMeseci;
     }
 
     public Long getId() {
@@ -57,5 +66,13 @@ public class Kupovina implements Serializable {
 
     public void setTipProizvoda(String tipProizvoda) {
         this.tipProizvoda = tipProizvoda;
+    }
+
+    public Integer getBrojMeseci() {
+        return brojMeseci;
+    }
+
+    public void setBrojMeseci(Integer brojMeseci) {
+        this.brojMeseci = brojMeseci;
     }
 }

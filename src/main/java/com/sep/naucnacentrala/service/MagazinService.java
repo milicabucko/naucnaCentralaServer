@@ -110,7 +110,7 @@ public class MagazinService {
     }
 
     private boolean placenaClanarinaZaMagazin(Long korisnikId, Long magazinId, String danasnjiDatum) {
-        Clanarina clanarina = clanarinaRepository.findByKorisnikIdAndMagazinIdAndDatumPocetkaLessThanEqualAndDatumZavrsetkaGreaterThan(korisnikId, magazinId, danasnjiDatum, danasnjiDatum);
+        Clanarina clanarina = clanarinaRepository.findByKorisnikIdAndMagazinIdAndDatumPocetkaLessThanEqualAndDatumZavrsetkaGreaterThanEqual(korisnikId, magazinId, danasnjiDatum, danasnjiDatum);
         if (clanarina != null) {
             return true;
         }
@@ -133,8 +133,8 @@ public class MagazinService {
 
                         String danasnjiDatum = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
                         if (placenaClanarinaZaMagazin(korisnikId, magazinId, danasnjiDatum)) {
-                            Clanarina clanarina = clanarinaRepository.findByKorisnikIdAndMagazinIdAndDatumPocetkaLessThanEqualAndDatumZavrsetkaGreaterThan(korisnikId, magazinId, danasnjiDatum, danasnjiDatum);
-                            kupovinaPutemClanarine(korisnikId, magazinId, clanarina.getBrojMeseci(), danasnjiDatum);
+                            Clanarina clanarina = clanarinaRepository.findByKorisnikIdAndMagazinIdAndDatumPocetkaLessThanEqualAndDatumZavrsetkaGreaterThanEqual(korisnikId, magazinId, danasnjiDatum, danasnjiDatum);
+                            kupovinaPutemClanarine(korisnikId, magazinId, clanarina.getBrojMeseci(), danasnjiDatum, false);
                         }
 
                         if (kupljeno(korisnikId, izdanjeMagazina.getId(), Constants.TIP_PROIZVODA_IZDANJE_MAGAZINA)) {
@@ -176,8 +176,8 @@ public class MagazinService {
 
                         String danasnjiDatum = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
                         if (placenaClanarinaZaMagazin(korisnikId, m.getId(), danasnjiDatum)) {
-                            Clanarina clanarina = clanarinaRepository.findByKorisnikIdAndMagazinIdAndDatumPocetkaLessThanEqualAndDatumZavrsetkaGreaterThan(korisnikId, m.getId(), danasnjiDatum, danasnjiDatum);
-                            kupovinaPutemClanarine(korisnikId, m.getId(), clanarina.getBrojMeseci(), danasnjiDatum);
+                            Clanarina clanarina = clanarinaRepository.findByKorisnikIdAndMagazinIdAndDatumPocetkaLessThanEqualAndDatumZavrsetkaGreaterThanEqual(korisnikId, m.getId(), danasnjiDatum, danasnjiDatum);
+                            kupovinaPutemClanarine(korisnikId, m.getId(), clanarina.getBrojMeseci(), danasnjiDatum, false);
                         }
 
                         if (kupljeno(korisnikId, izdanjeMagazinaId, Constants.TIP_PROIZVODA_IZDANJE_MAGAZINA)) {
@@ -219,7 +219,7 @@ public class MagazinService {
         }
     }
     
-    public Kupovina kupovinaPutemClanarine(Long korisnikId, Long magazinId, int brojMeseci, String danasnjiDatum) {
+    public Kupovina kupovinaPutemClanarine(Long korisnikId, Long magazinId, int brojMeseci, String danasnjiDatum, boolean cuvanjeClanarine) {
 
         String yyyyMMdd = danasnjiDatum;
 
@@ -269,6 +269,14 @@ public class MagazinService {
             }
         }
 
+        // cuvanje clanarine
+        if (cuvanjeClanarine == true) {
+            if (meseciIzdanja.size() == 1) {
+                clanarinaRepository.save(new Clanarina(korisnikId, magazinId, 0.0, meseciIzdanja.get(0), meseciIzdanja.get(0), brojMeseci));
+            } else {
+                clanarinaRepository.save(new Clanarina(korisnikId, magazinId, 0.0, meseciIzdanja.get(0), meseciIzdanja.get(meseciIzdanja.size() - 1), brojMeseci));
+            }
+        }
         return null;
 
     }
