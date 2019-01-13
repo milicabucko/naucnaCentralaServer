@@ -36,6 +36,9 @@ public class MagazinService {
     @Autowired
     private KupovinaRepository kupovinaRepository;
 
+    @Autowired
+    private CenovnikClanarineRepository cenovnikClanarineRepository;
+
     public List<Magazin> findAllMagazin() {
         return magazinRepository.findAll();
     }
@@ -88,6 +91,8 @@ public class MagazinService {
                 for (Magazin m : magazini) {
                     MagazinDTO mDTO = new MagazinDTO(m);
                     if (!m.getOpenAccess()) {
+                        CenovnikClanarine cenovnikClanarine = cenovnikClanarineRepository.findByMagazinId(m.getId());
+                        mDTO.setCenovnikClanarine(cenovnikClanarine);
                         String danasnjiDatum = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
                         if (placenaClanarinaZaMagazin(korisnikId, m.getId(), danasnjiDatum)) {
                             mDTO.setPlatiClanarinu(false);

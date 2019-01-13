@@ -1,5 +1,6 @@
 package com.sep.naucnacentrala.dto;
 
+import com.sep.naucnacentrala.model.CenovnikClanarine;
 import com.sep.naucnacentrala.model.Magazin;
 
 public class MagazinDTO {
@@ -11,6 +12,8 @@ public class MagazinDTO {
     private Boolean postaviRad;
 
     private Boolean placenaClanarina;
+
+    private CenovnikClanarine cenovnikClanarine;
 
     public MagazinDTO() {
 
@@ -50,5 +53,13 @@ public class MagazinDTO {
 
     public Boolean getPlacenaClanarina() {
         return placenaClanarina;
+    }
+
+    public CenovnikClanarine getCenovnikClanarine() {
+        return cenovnikClanarine;
+    }
+
+    public void setCenovnikClanarine(CenovnikClanarine cenovnikClanarine) {
+        this.cenovnikClanarine = cenovnikClanarine;
     }
 }
