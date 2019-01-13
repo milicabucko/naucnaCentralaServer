@@ -23,6 +23,8 @@ public class Clanarina implements Serializable {
 
     private String datumZavrsetka;
 
+    private Integer brojMeseci;
+
     Clanarina() {}
 
     public Long getId() {
@@ -71,5 +73,13 @@ public class Clanarina implements Serializable {
 
     public void setDatumZavrsetka(String datumZavrsetka) {
         this.datumZavrsetka = datumZavrsetka;
+    }
+
+    public Integer getBrojMeseci() {
+        return brojMeseci;
+    }
+
+    public void setBrojMeseci(Integer brojMeseci) {
+        this.brojMeseci = brojMeseci;
     }
 }

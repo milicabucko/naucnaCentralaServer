@@ -8,5 +8,6 @@ import java.util.List;
 public interface IzdanjeMagazinaRepository extends JpaRepository<IzdanjeMagazina, Long> {
 
     List<IzdanjeMagazina> findByMagazinId(Long magazinId);
+    IzdanjeMagazina findByMagazinIdAndMesec(Long magazinId, String mesec);
 
 }

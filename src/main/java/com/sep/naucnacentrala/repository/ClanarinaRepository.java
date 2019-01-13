@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ClanarinaRepository extends JpaRepository<Clanarina, Long> {
 
-    Clanarina findByKorisnikIdAndMagazinIdAndDatumPocetkaLessThanEqualAndDatumZavrsetkaGreaterThanEqual(Long korisnikId, Long magazinId, String dasasnjiDatum, String danasnjiDatum);
+    Clanarina findByKorisnikIdAndMagazinIdAndDatumPocetkaLessThanEqualAndDatumZavrsetkaGreaterThan(Long korisnikId, Long magazinId, String dasasnjiDatum, String danasnjiDatum);
 
 }
