@@ -4,8 +4,10 @@ import com.sep.naucnacentrala.model.Korisnik;
 import com.sep.naucnacentrala.repository.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class KorisnikService {
 
     @Autowired
