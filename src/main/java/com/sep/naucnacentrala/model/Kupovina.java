@@ -20,8 +20,28 @@ public class Kupovina implements Serializable {
     private String tipProizvoda;
 
     private Integer brojMeseci;
+    
+    private String bitCoinOrderId;
+    
+    private Double cena;
 
-    public Kupovina() {}
+    public Double getCena() {
+		return cena;
+	}
+
+	public void setCena(Double cena) {
+		this.cena = cena;
+	}
+
+	public String getBitCoinOrderId() {
+		return bitCoinOrderId;
+	}
+
+	public void setBitCoinOrderId(String bitCoinOrderId) {
+		this.bitCoinOrderId = bitCoinOrderId;
+	}
+
+	public Kupovina() {}
 
     public Kupovina(Long korisnikId, Long proizvodId, String tipProizvoda) {
         this.korisnikId = korisnikId;
