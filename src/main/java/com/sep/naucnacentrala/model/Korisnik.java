@@ -1,5 +1,6 @@
 package com.sep.naucnacentrala.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,14 @@ public class Korisnik implements Serializable {
     private String email;
 
     private String uloga;
+
+    private Boolean banka;
+
+    private Boolean paypal;
+
+    private Boolean bitcoin;
+
+    private String token;
 
     Korisnik() {}
 
@@ -71,5 +80,37 @@ public class Korisnik implements Serializable {
 
     public void setUloga(String uloga) {
         this.uloga = uloga;
+    }
+
+    public Boolean getBanka() {
+        return banka;
+    }
+
+    public void setBanka(Boolean banka) {
+        this.banka = banka;
+    }
+
+    public Boolean getPaypal() {
+        return paypal;
+    }
+
+    public void setPaypal(Boolean paypal) {
+        this.paypal = paypal;
+    }
+
+    public Boolean getBitcoin() {
+        return bitcoin;
+    }
+
+    public void setBitcoin(Boolean bitcoin) {
+        this.bitcoin = bitcoin;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
