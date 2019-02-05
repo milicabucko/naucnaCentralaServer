@@ -64,17 +64,21 @@ public class KorisnikController {
     }
 
     @RequestMapping(
-            value = "/korisnik/login/{email:.+}",
+            value = "/korisnik/login/{email:.+}/{lozinka}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Korisnik> login(@PathVariable String email) {
+    public ResponseEntity<Korisnik> login(@PathVariable String email, @PathVariable String lozinka) {
 
         Korisnik k = korisnikService.findByEmail(email);
-        //BCrypt.checkpw("trazenaLozinka", k.getLozinka());
-        Korisnik korisnik = korisnikService.save(k);
-        KorisnikService.aktivanKorisnik = korisnik;
-        System.out.println("usla sam u kontroler");
-        return new ResponseEntity<>(korisnik,HttpStatus.OK);
+        if (k != null) {
+            if (BCrypt.checkpw(lozinka, k.getLozinka())) {
+                KorisnikService.aktivanKorisnik = k;
+                return new ResponseEntity<>(k, HttpStatus.OK);
+            }
+        }
+        Korisnik nepostojeciKorisnik = new Korisnik();
+        nepostojeciKorisnik.setId(-1L);
+        return new ResponseEntity<>(nepostojeciKorisnik, HttpStatus.OK);
     }
 
 

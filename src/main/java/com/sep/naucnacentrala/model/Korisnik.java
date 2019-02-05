@@ -32,7 +32,7 @@ public class Korisnik implements Serializable {
 
     private String token;
 
-    Korisnik() {}
+    public Korisnik() {}
 
     public Long getId() {
         return id;

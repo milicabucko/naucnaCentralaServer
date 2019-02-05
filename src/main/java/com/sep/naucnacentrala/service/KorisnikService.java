@@ -20,6 +20,11 @@ public class KorisnikService {
         return  korisnik;
     }
 
+    public Korisnik findByEmailAndLozinka(String email, String lozinka){
+        Korisnik korisnik = korisnikRepository.findByEmailAndLozinka(email, lozinka);
+        return  korisnik;
+    }
+
     public Korisnik save(Korisnik korisnik){
         korisnikRepository.save(korisnik);
         return korisnik;
