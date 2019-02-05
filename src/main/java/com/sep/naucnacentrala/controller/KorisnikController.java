@@ -10,6 +10,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.StyledEditorKit;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 
 @RestController
@@ -39,6 +43,23 @@ public class KorisnikController {
         korisnik = korisnikService.save(korisnik);
         logger.info("\n\t\tKorisnik je uspešno registrovan.\n");
         return new ResponseEntity<>(korisnik, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "/korisnik/commonPassword/{lozinka}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Boolean> isCommonPassword(@PathVariable String lozinka) throws IOException {
+
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/sep/naucnacentrala/txtfiles/commonPasswords.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (lozinka.equals(line)) {
+                    return new ResponseEntity<>(true, HttpStatus.OK);
+                }
+            }
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(
