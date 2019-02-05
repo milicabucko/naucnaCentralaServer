@@ -8,16 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.StyledEditorKit;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://localhost:4200")
 public class KorisnikController {
 
     @Autowired
@@ -40,6 +39,8 @@ public class KorisnikController {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Korisnik> login(@RequestBody Korisnik korisnik) {
+
+        korisnik.setLozinka(BCrypt.hashpw(korisnik.getLozinka(), BCrypt.gensalt()));
         korisnik = korisnikService.save(korisnik);
         logger.info("\n\t\tKorisnik je uspešno registrovan.\n");
         return new ResponseEntity<>(korisnik, HttpStatus.OK);
@@ -69,6 +70,7 @@ public class KorisnikController {
     public ResponseEntity<Korisnik> login(@PathVariable String email) {
 
         Korisnik k = korisnikService.findByEmail(email);
+        //BCrypt.checkpw("trazenaLozinka", k.getLozinka());
         Korisnik korisnik = korisnikService.save(k);
         KorisnikService.aktivanKorisnik = korisnik;
         System.out.println("usla sam u kontroler");
