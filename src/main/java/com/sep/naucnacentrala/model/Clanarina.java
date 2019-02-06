@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Clanarina implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long korisnikId;
@@ -25,7 +25,8 @@ public class Clanarina implements Serializable {
 
     private Integer brojMeseci;
 
-    Clanarina() {}
+    public Clanarina() {
+    }
 
     public Clanarina(Long korisnikId, Long magazinId, Double cena, String datumPocetka, String datumZavrsetka, Integer brojMeseci) {
         this.korisnikId = korisnikId;

@@ -10,18 +10,16 @@ import java.io.Serializable;
 public class IzdanjeMagazina implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long magazinId;
 
     private String mesec;
 
-    private Boolean besplatan;
-
     private Double cena;
 
-    IzdanjeMagazina() {}
+    public IzdanjeMagazina() {}
 
     public Long getId() {
         return id;
@@ -45,14 +43,6 @@ public class IzdanjeMagazina implements Serializable {
 
     public void setMesec(String mesec) {
         this.mesec = mesec;
-    }
-
-    public Boolean getBesplatan() {
-        return besplatan;
-    }
-
-    public void setBesplatan(Boolean besplatan) {
-        this.besplatan = besplatan;
     }
 
     public Double getCena() {

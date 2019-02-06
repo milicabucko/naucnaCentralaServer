@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class CenovnikClanarine implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long magazinId;
@@ -19,7 +19,7 @@ public class CenovnikClanarine implements Serializable {
 
     private Integer brojMeseci;
 
-    CenovnikClanarine() {}
+    public CenovnikClanarine() {}
 
     public CenovnikClanarine(Long magazinId, Double cena, Integer brojMeseci) {
         this.magazinId = magazinId;

@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Magazin implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String naziv;
@@ -19,7 +19,7 @@ public class Magazin implements Serializable {
 
     private String slika;
 
-    Magazin() {}
+    public Magazin() {}
 
     public void setSlika(String slika) {
         this.slika = slika;

@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class NaucniRad implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long magazinId;
@@ -25,13 +25,11 @@ public class NaucniRad implements Serializable {
 
     private Boolean prihvacen;
 
-    private Boolean besplatan;
-
     private Double cena;
 
     private String link;
 
-    NaucniRad() {}
+    public NaucniRad() {}
 
     public Long getId() {
         return id;
@@ -87,14 +85,6 @@ public class NaucniRad implements Serializable {
 
     public void setPrihvacen(Boolean prihvacen) {
         this.prihvacen = prihvacen;
-    }
-
-    public Boolean getBesplatan() {
-        return besplatan;
-    }
-
-    public void setBesplatan(Boolean besplatan) {
-        this.besplatan = besplatan;
     }
 
     public Double getCena() {
