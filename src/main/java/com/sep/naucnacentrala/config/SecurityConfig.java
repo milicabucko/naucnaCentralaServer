@@ -1,64 +1,68 @@
 package com.sep.naucnacentrala.config;
 
-//@Configuration
-//@EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig {// extends WebSecurityConfigurerAdapter {
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.sep.naucnacentrala.service.UserDetailServiceImpl;
+
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-//	@Autowired
-//	private Environment env;
-//	
-//	@Autowired
-//	private UserSecurityService userSecurityService;
-//	
-//	private static final String SALT = "salt";	//Salt should be protected carefully
-//	
-//	@Bean
-//	public BCryptPasswordEncoder passwordEncoder() {
-//		return new BCryptPasswordEncoder(12, new SecureRandom(SALT.getBytes()));
-//	}
-//
-//	private static final String[] PUBLIC_MATCHERS = {
-//			"/webjars/**",
-//			"/css/**",
-//			"/js/**",
-//			"/images/**",
-//			"/",
-//			"/about/**",
-//			"/contact/**",
-//			"/error/**/*",
-//			"/console/**",
-//			"/signup"
-//	};
-//	
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http
-//				.csrf().disable().cors().disable()
-//				.formLogin()
-//				.loginPage("/login").permitAll()
-//				.loginProcessingUrl("/login").permitAll()
-//                .usernameParameter("username")
-//                .successHandler((request, response, authentication) -> {
-//                    response.setStatus(HttpServletResponse.SC_OK);
-//                    response.sendRedirect("/userFront");
-//                })
-//                .failureHandler((request, response, exception) -> {
-//                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                   
-//                })
-////				.failureUrl("/index?error")
-////				.defaultSuccessUrl("/userFront").loginPage("/index").permitAll()
-//				.and()
-//				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/index?logout").deleteCookies("remember-me").permitAll()
-//				.and()
-//				.rememberMe();
-//	}
+	private UserDetailServiceImpl userDetailService;
+
+	public SecurityConfig(UserDetailServiceImpl userDetailService) {
+		this.userDetailService = userDetailService;
+	}
 	
-	//@Autowired
-	//public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER"); // This is in-memory
-		//auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
-//	}
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.cors()
+			.and()
+			.csrf().disable()
+			.authorizeRequests()
+				.antMatchers("/api/auth/**").permitAll()
+				//.antMatchers("/api/users/getLoggedUser").permitAll()
+				.antMatchers("/korisnik/registration/**").permitAll()
+				.antMatchers("/korisnik/login/**").permitAll()
+				.antMatchers("/korisnik/commonPassword/**").permitAll()
+				.anyRequest()
+				.authenticated();
+	}
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(authProvider());
+	}
+
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+	 
+	@Bean
+	public DaoAuthenticationProvider authProvider() {
+	    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+	    authProvider.setUserDetailsService(userDetailService);
+	    authProvider.setPasswordEncoder(getPasswordEncoder());
+	    return authProvider;
+	}
+	
+	@Bean
+	public BCryptPasswordEncoder getPasswordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 
 }

@@ -30,13 +30,19 @@ public class RestTemplateConfig {
 		TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
 
 		SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom()
-		        .loadTrustMaterial(null, acceptingTrustStrategy)
+		        .loadTrustMaterial(new TrustAllStrategy())
 		        .build();
 
-		SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext);
+		//SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext);
+		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+				sslContext, //for you this is builder.build()
+	            SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER
+	);
 
 		CloseableHttpClient httpClient = HttpClients.custom()
-		        .setSSLSocketFactory(csf)
+		        .setSSLSocketFactory(sslsf)
+	            .setHostnameVerifier(SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+
 		        .build();
 
 		HttpComponentsClientHttpRequestFactory requestFactory =
