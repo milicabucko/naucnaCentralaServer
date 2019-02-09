@@ -21,16 +21,9 @@ import com.sep.naucnacentrala.model.Korisnik;
 @Service
 public class SecurityService {
 	
-	private final KorisnikService userService;
-	private final SecurityConfig securityConfig;
-
-	@Autowired
-	public SecurityService(KorisnikService userService, SecurityConfig securityConfig) {
-		this.userService = userService;
-		this.securityConfig = securityConfig;
-	}
+	private  KorisnikService userService;
+	private  SecurityConfig securityConfig;
 	
-
 	public Korisnik login(Korisnik user) {
 		try {
 			UserDetails userDetails = userService.loadUserByUsername(user.getEmail());

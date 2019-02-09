@@ -25,7 +25,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		this.userRepository = userRepository;
 	}
 
-	@Override
+	//@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Korisnik user = userRepository.findByEmail(username);
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();

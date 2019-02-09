@@ -15,8 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.sep.naucnacentrala.service.UserDetailServiceImpl;
 
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private UserDetailServiceImpl userDetailService;
@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		this.userDetailService = userDetailService;
 	}
 	
-	@Override
+	//@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors()
 			.and()
@@ -40,18 +40,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticated();
 	}
 
-	@Override
+	//@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(authProvider());
 	}
 
-	@Bean
-	@Override
+	//@Bean
+	//@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
 	 
-	@Bean
+	//@Bean
 	public DaoAuthenticationProvider authProvider() {
 	    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 	    authProvider.setUserDetailsService(userDetailService);
@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    return authProvider;
 	}
 	
-	@Bean
+	//@Bean
 	public BCryptPasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
